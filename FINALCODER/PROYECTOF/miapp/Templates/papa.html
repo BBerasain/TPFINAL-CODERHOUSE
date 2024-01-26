@@ -1,0 +1,41 @@
+{% extends "padre.html" %}
+{% load static %}
+{% block ContenidoQueCambia %}
+<h1>LISTA DE TRASPASOS</h1>
+<head>
+  {% if Traspasos %}
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Nacionalidad</th>
+        <th>Último Equipo</th>
+        <th>Nuevo Equipo</th>
+        <th>Valor de Traspaso</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for jugador in Traspasos %}
+        <tr>
+          <td>{{ jugador.nombre }}</td>
+          <td>{{ jugador.edad }}</td>
+          <td>{{ jugador.nacionalidad }}</td>
+          <td>{{ jugador.ultimo_equipo }}</td>
+          <td>{{ jugador.nuevo_equipo }}</td>
+          <td>{{ jugador.valor_de_traspaso }}</td>
+        <th>
+        <form method="post" action="{% url "EliminarTraspaso" nombre_jugador=jugador.nombre %}">
+          {% csrf_token %}
+          <th><button type="submit">Eliminar</button></th>
+        </form>
+    
+  {% endfor %}
+</tbody>
+</table>
+{% endif %}
+
+{% endblock %}
+
+
+

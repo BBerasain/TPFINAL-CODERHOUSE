@@ -1,0 +1,15 @@
+{% extends "padre.html" %}
+{% load static %}
+{% block ContenidoQueCambia %}
+<h1>Crear Usuario</h1>
+<body>
+    <form action="{% url "registro" %}" method="POST">
+        <table>
+            {% csrf_token%}
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="Enviar">    
+    </form>
+</body>
+</head>
+{% endblock %}

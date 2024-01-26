@@ -1,0 +1,12 @@
+{% extends "padre.html" %}
+{% load static %}
+{% block ContenidoQueCambia %}
+<h1>Iniciar sesion</h1>
+<body>
+    <form action="{% url "login" %}" method="POST">
+        {% csrf_token%}
+        {{form.as_p}}
+        <button type="submit"> Iniciar </button>    </form>
+</body>
+
+{% endblock %}
