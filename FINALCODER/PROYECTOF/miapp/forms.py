@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
+from miapp.models import Jugadores
 
 
 
@@ -24,3 +25,9 @@ class UserEditForm(UserCreationForm):
         model = User
         fields = [ "nombre", "password1", "password"]
         help_text = {k:"" for k in fields}
+        
+
+class FormularioEditar(forms.ModelForm):
+    class Meta:
+        model = Jugadores
+        fields = ['nombre', 'edad', 'nacionalidad', 'ultimo_equipo', 'nuevo_equipo', 'valor_de_traspaso']
