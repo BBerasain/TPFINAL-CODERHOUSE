@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render#, get_object_or_404, filter
 from django.http import HttpResponse
 from miapp.models import Usuario, Jugadores
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
-from miapp.forms import UserRegisterForm, UserEditForm
+from miapp.forms import UserRegisterForm, UserEditForm, FormularioEditar
 
 
 
@@ -82,7 +82,35 @@ def leerTraspasos(request):
   
 
 def eliminarTraspaso(request, nombre_jugador):
-               
-    jugador = get_object_or_404(Jugadores, nombre=nombre_jugador)
+            
+    jugador = Jugadores.objects.filter(nombre=nombre_jugador)
     jugador.delete()
     return render(request, "leerTraspasos.html")
+
+def editarTraspaso(request, nombre_jugador):
+    
+    jugador = Jugadores.objects.get(nombre=nombre_jugador)
+    
+    if request.method == "POST":
+        
+        miFormulario = FormularioEditar(request.POST)
+        
+        print(miFormulario)
+        
+        if miFormulario.is_valid():
+            
+            informacion = miFormulario.cleaned_data
+            
+            jugador.nombre = informacion["nombre"]
+            jugador.edad = informacion["edad"]
+            jugador.nacionalidad = informacion["nacionalidad"]
+            jugador.ultimo_equipo = informacion["ultimo_equipo"]
+            jugador.nuevo_equipo = informacion["nuevo_equipo"]
+            jugador.valor_de_traspaso = informacion["valor_de_traspaso"]
+            jugador.save()
+            return render(request, "leerTraspasos.html")
+        
+    else:
+        miFormulario = FormularioEditar(initial={"nombre":jugador.nombre, "edad":jugador.edad, "nacionalidad":jugador.nacionalidad, "ultimo_equipo":jugador.ultimo_equipo, "nuevo_equipo":jugador.nuevo_equipo, "valor_de_traspaso":jugador.valor_de_traspaso})
+        
+    return render(request, "editarTraspaso.html", {"miFormulario":miFormulario, "nombre_jugador":nombre_jugador})
