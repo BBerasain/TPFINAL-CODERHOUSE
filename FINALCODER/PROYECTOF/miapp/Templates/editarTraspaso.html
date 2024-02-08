@@ -1,0 +1,18 @@
+{% extends "padre.html" %}
+{% load static %}
+{% block ContenidoQueCambia %}
+<title>Editar Traspaso - {{ nombre_jugador }}</title>
+</head>
+<body>
+
+<h2>Editar Traspaso - {{ nombre_jugador }}</h2>
+
+<form method="post" action="{% url "editarTraspaso" nombre_jugador=nombre_jugador %}">
+    {% csrf_token %}
+    
+    {{ miFormulario.as_p }}
+    
+    <button type="submit">Guardar cambios</button>
+</form>
+</body>
+{% endblock %}
