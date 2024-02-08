@@ -13,7 +13,8 @@
         <th>Último Equipo</th>
         <th>Nuevo Equipo</th>
         <th>Valor de Traspaso</th>
-      </tr>
+        <th>Acciones</th>
+      </tr>    
     </thead>
     <tbody>
       {% for jugador in Traspasos %}
@@ -24,18 +25,19 @@
           <td>{{ jugador.ultimo_equipo }}</td>
           <td>{{ jugador.nuevo_equipo }}</td>
           <td>{{ jugador.valor_de_traspaso }}</td>
+          <td>
+            <form method="post" action="{% url "editarTraspaso" nombre_jugador=jugador.nombre %}">
+              {% csrf_token %}
+              <button type="submit">Editar</button>
+            </form>
+            <form method="post" action="{% url "EliminarTraspaso" nombre_jugador=jugador.nombre %}">
+              {% csrf_token %}
+              <button type="submit">Eliminar</button>
+            </form>
+          </td>
         </tr>
-        <form method="post" action="{% url "EliminarTraspaso" nombre_jugador=jugador.nombre %}">
-          {% csrf_token %}
-          <th><button type="submit">Eliminar</button></th>
-        </form>
-      </td>
-    </tr>
-  {% endfor %}
-</tbody>
-</table>
-{% else %}
-<p>Se ha borrado el traspaso correctamente!</p>
-{% endif %}
-
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
 {% endblock %}
