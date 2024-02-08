@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from miapp.views import inicio, registro, login_request, index, about_me, traspasos, leerTraspasos, eliminarTraspaso
+from miapp.views import inicio, registro, login_request, index, about_me, traspasos, leerTraspasos, eliminarTraspaso, editarTraspaso
 
 
 urlpatterns = [
@@ -13,4 +13,5 @@ urlpatterns = [
     path("traspasos/", traspasos, name="traspasos"),
     path("leerTraspasos/", leerTraspasos, name="LeerTraspasos"),
     path("eliminarTraspaso/<str:nombre_jugador>/", eliminarTraspaso, name="EliminarTraspaso"),
+    path("editarTraspaso/<str:nombre_jugador>/", editarTraspaso, name="editarTraspaso"),
 ]
