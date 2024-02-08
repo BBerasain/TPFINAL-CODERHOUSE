@@ -9,9 +9,6 @@ funciones:
 - los usuarios pueden cerrar su cuenta desde el boton que aparece una vez iniciada la sesion llamado "CERRAR SESION"
 
   LISTA DE TRASPASOS: Este sitio esta creado para ver los traspasos de jugadores sus equipos, logrando ver sus datos como nombre, edad, nacionalidad, ultimo club, su nuevo club y el valor por el que fue transferido el jugador o si llega en condicion de libre.
-  los usuario tienen la posibilidad de agregar un nuevo traspaso en cualquier momento y de momento no se puede editar los datos pero si esta permitido eliminar cualquiera.
+  los usuario tienen la posibilidad de agregar un nuevo traspaso en cualquier momento y cuentan tambien con la posibilidad de editar estos traspasos, por si existe algun error.
   ABOUT ME: Cualquiera que entre a la solapa ABOUT ME puede ver informacion acerca del creador de la pagina.
-
-  PD: QUEDAN PENDIENTES LA OPCION DE EDITAR Y EL AGREGAR UN AVATAR AL USUARIO
-
   SALUDOS
