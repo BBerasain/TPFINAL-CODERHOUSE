@@ -4,6 +4,7 @@ from miapp.models import Usuario, Jugadores
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from miapp.forms import UserRegisterForm, UserEditForm, FormularioEditar
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -55,7 +56,7 @@ def registro(request):
 def about_me(request):
     return render(request, "about_me.html")
 
-
+@login_required(login_url='/login')
 def traspasos(request):
     if request.method == "POST":
         nombre = request.POST.get("nombre")
@@ -80,13 +81,14 @@ def leerTraspasos(request):
     contexto = {"Traspasos":jugadores}
     return render(request, "leerTraspasos.html",contexto)
   
-
+@login_required(login_url='/login')
 def eliminarTraspaso(request, nombre_jugador):
             
     jugador = Jugadores.objects.filter(nombre=nombre_jugador)
     jugador.delete()
     return render(request, "leerTraspasos.html")
 
+@login_required(login_url='/login')
 def editarTraspaso(request, nombre_jugador):
     
     jugador = Jugadores.objects.get(nombre=nombre_jugador)
@@ -114,3 +116,4 @@ def editarTraspaso(request, nombre_jugador):
         miFormulario = FormularioEditar(initial={"nombre":jugador.nombre, "edad":jugador.edad, "nacionalidad":jugador.nacionalidad, "ultimo_equipo":jugador.ultimo_equipo, "nuevo_equipo":jugador.nuevo_equipo, "valor_de_traspaso":jugador.valor_de_traspaso})
         
     return render(request, "editarTraspaso.html", {"miFormulario":miFormulario, "nombre_jugador":nombre_jugador})
+
