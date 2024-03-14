@@ -116,4 +116,3 @@ def editarTraspaso(request, nombre_jugador):
         miFormulario = FormularioEditar(initial={"nombre":jugador.nombre, "edad":jugador.edad, "nacionalidad":jugador.nacionalidad, "ultimo_equipo":jugador.ultimo_equipo, "nuevo_equipo":jugador.nuevo_equipo, "valor_de_traspaso":jugador.valor_de_traspaso})
         
     return render(request, "editarTraspaso.html", {"miFormulario":miFormulario, "nombre_jugador":nombre_jugador})
-
