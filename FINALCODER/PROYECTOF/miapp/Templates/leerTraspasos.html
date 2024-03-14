@@ -1,40 +1,48 @@
 {% extends "padre.html" %}
 {% load static %}
 {% block ContenidoQueCambia %}
-<h1>LISTA DE TRASPASOS</h1>
-<head>
-  {% if Traspasos %}
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Edad</th>
-        <th>Nacionalidad</th>
-        <th>Último Equipo</th>
-        <th>Nuevo Equipo</th>
-        <th>Valor de Traspaso</th>
-        <th>Acciones</th>
-      </tr>    
-    </thead>
-    <tbody>
-      {% for jugador in Traspasos %}
+  <h1 style="font-size: 24px; color: #333; text-align: center; margin-bottom: 10px;">LISTA DE TRASPASOS</h1>
+  <head>
+    {% if Traspasos %}
+    <table style="border-collapse: collapse; width: 100%; margin: 10px; border: 2px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+      <thead style="background-color: #333; color: #fff;">
         <tr>
-          <td>{{ jugador.nombre }}</td>
-          <td>{{ jugador.edad }}</td>
-          <td>{{ jugador.nacionalidad }}</td>
-          <td>{{ jugador.ultimo_equipo }}</td>
-          <td>{{ jugador.nuevo_equipo }}</td>
-          <td>{{ jugador.valor_de_traspaso }}</td>
-          <td>
-            <form method="post" action="{% url "editarTraspaso" nombre_jugador=jugador.nombre %}">
-              {% csrf_token %}
-              <button type="submit">Editar</button>
-            </form>
-            <form method="post" action="{% url "EliminarTraspaso" nombre_jugador=jugador.nombre %}">
-              {% csrf_token %}
-              <button type="submit">Eliminar</button>
-            </form>
-          </td>
+          <th style="border: 0.5px solid #333; padding: 10px;">Nombre</th>
+          <th style="border: 0.5px solid #333; padding: 10px;">Edad</th>
+          <th style="border: 0.5px solid #333; padding: 10px;">Nacionalidad</th>
+          <th style="border: 0.5px solid #333; padding: 10px;">Último Equipo</th>
+          <th style="border: 0.5px solid #333; padding: 10px;">Nuevo Equipo</th>
+          <th style="border: 0.5px solid #333; padding: 10px;">Valor de Traspaso</th>
+          <th style="border: 0.5px solid #333; padding: 10px;">Acciones</th>
+        </tr>    
+      </thead>
+      <tbody>
+        {% for jugador in Traspasos %}
+          <tr style="border: 0.5px solid #333; background-color: #f8f8f8;">
+            <td style="border: 0.5px solid #333; padding: 10px; font-weight: bold; color: #333;">{{ jugador.nombre }}</td>
+            <td style="border: 0.5px solid #333; padding: 10px; font-weight: bold; color: #555;">{{ jugador.edad }}</td>
+            <td style="border: 0.5px solid #333; padding: 10px; font-weight: bold; color: #777;">{{ jugador.nacionalidad }}</td>
+            <td style="border: 0.5px solid #333; padding: 10px; font-weight: bold; color: #999;">{{ jugador.ultimo_equipo }}</td>
+            <td style="border: 0.5px solid #333; padding: 10px; font-weight: bold; color: #888;">{{ jugador.nuevo_equipo }}</td>
+            <td style="border: 0.5px solid #333; padding: 10px; font-weight: bold; color: #666;">{{ jugador.valor_de_traspaso }}</td>
+            <td style="border: 0.5px solid #333; padding: 10px; margin: 0;">
+              <form method="post" action="{% url "editarTraspaso" nombre_jugador=jugador.nombre %}">
+                {% csrf_token %}
+                <button type="submit" style="font-size: 12px; padding: 5px 10px; background-color: #4CAF50; color: #fff; border: none; border-radius: 5px;">Editar</button>
+              </form>
+              <form method="post" action="{% url "EliminarTraspaso" nombre_jugador=jugador.nombre %}">
+                {% csrf_token %}
+                <button type="submit" style="font-size: 12px; padding: 5px 10px; background-color: #f44336; color: #fff; border: none; border-radius: 5px;">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </head>
+{% endblock %}
+
         </tr>
       {% endfor %}
     </tbody>
