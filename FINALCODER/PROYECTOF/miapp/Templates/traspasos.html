@@ -1,111 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        {% load static  %}
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Landing Page - Start Bootstrap Theme</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-                <a class="navbar-brand" href="{% url "inicio" %}"><button>Inicio</button></a>
-                <a class="navbar-brand" href="{% url "about_me" %}"><button>About me</button></a>
-                <a class="navbar-brand" href="{% url "LeerTraspasos" %}"><button>Traspasos 2024</button></a>
+<head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Landing Page - Start Bootstrap Theme</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <!-- Estilos personalizados -->
+    <style>
+        /* Estilos para los botones */
+        .navbar-brand button {
+            background-color: #3498db; /* Color de fondo del botón */
+            color: #ffffff; /* Color del texto del botón */
+            border: 1px solid #2980b9; /* Color del borde del botón */
+            margin: 0 5px; /* Margen entre botones */
+        }
 
-                {% if request.user.is_authenticated %}
-                <form method="post" action="{% url "logout" %}">
-                    {%csrf_token%}
-                    <button type="submit">Cerrar Sesion</button>
+        .navbar-brand button:hover {
+            background-color: #2980b9; /* Cambio de color al pasar el mouse sobre el botón */
+        }
 
-                </form>
-                {% else %}
-                <a class="navbar-brand" href="{% url "login" %}"><button>Iniciar Sesion</button></a>
-                <a class="navbar-brand" href="{% url "registro" %}"><button>Crear usuario</button></a>
-
-                {% endif %}
+        /* Estilos para el texto de bienvenida */
+        .navbar-form a {
+            color: #555; /* Color del texto */
+            margin-right: 10px; /* Margen derecho */
+            font-weight: bold; /* Negrita */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-light bg-light static-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url "inicio" %}"><button class="btn btn-primary">Inicio</button></a>
+            <a class="navbar-brand" href="{% url "about_me" %}"><button class="btn btn-primary">About me</button></a>
+            <a class="navbar-brand" href="{% url "LeerTraspasos" %}"><button class="btn btn-primary">Traspasos 2024</button></a>
+            
+            {% if request.user.is_authenticated %}
+            <form method="post" action="{% url "logout" %}">
+            {% csrf_token %}
+            <span class="navbar-text" style="font-size: 18px; font-weight: bold; color: #3498db;">Bienvenido, {{ user }}</span>
+            <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+            </form>
+            
+            {% else %}
+            <a class="navbar-brand" href="{% url "login" %}"><button class="btn btn-primary">Iniciar Sesión</button></a>
+            <a class="navbar-brand" href="{% url "registro" %}"><button class="btn btn-primary">Crear usuario</button></a>
+            {% endif %}
 
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center text-white">
-                            <!-- Page heading-->
-                    <body>
-                        <form action="/traspasos/"     method="post">{% csrf_token %}
-                            <p> nombre: <input type = "text" name="nombre">
-                            <p> edad: <input type = "text" name="edad">
-                            <p> nacionalidad: <input type = "text" name="nacionalidad">
-                            <p> ultimo equipo: <input type = "text" name="ultimo equipo">
-                            <p> nuevo equipo: <input type = "text" name="nuevo equipo">
-                            <p> valor de traspaso: <input type = "text" name="valor de traspaso">
-                            
-                                <input type = "submit" value="Enviar">
-                    </body>        
-                           
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- Icons Grid-->
+        <<head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Tu Página de Traspasos</title>
+            <style>
+                body {
+                    font-family: 'Arial', sans-serif;
+                    background-color: #f8f9fa;
+                    margin: 0;
+                    padding: 0;
+                }
         
-        {% block ContenidoQueCambia %}
-        {% endblock %}
- 
-        <!-- Footer-->
-        <footer class="footer bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                        <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">About</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Contact</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
-                        </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2023. All Rights Reserved.</p>
-                    </div>
-                    <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
-                            </li>
-                        </ul>
+                header.masthead {
+                    background-color: #343a40;
+                    color: #ffffff;
+                    padding: 30px 0;
+                    text-align: center;
+                }
+        
+                header.masthead h1 {
+                    font-size: 2.5em;
+                    margin-bottom: 20px;
+                    color: #000000; /* Black color */
+                }
+        
+                .form-container {
+                    text-align: center;
+                    background-color: #ffffff;
+                    padding: 20px;
+                    border-radius: 10px;
+                    margin: 20px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+        
+                form {
+                    margin-top: 20px;
+                }
+        
+                form p {
+                    margin-bottom: 15px;
+                    color: #000000; /* Black color */
+                }
+        
+                input[type="text"] {
+                    padding: 10px;
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+        
+                input[type="submit"] {
+                    background-color: #343a40;
+                    color: #ffffff;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+            </style>
+        </head>
+        <body>
+        
+            <header class="masthead">
+                <div class="container position-relative">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-6">
+                            <div class="text-center text-white">
+                                <h1>NUEVO TRASPASO</h1>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </header>
+        
+            <div class="form-container">
+                <form action="/traspasos/" method="post">
+                    {% csrf_token %}
+                    <p style="color: #000000;">Nombre: <input type="text" name="nombre"></p>
+                    <p style="color: #000000;">Edad: <input type="text" name="edad"></p>
+                    <p style="color: #000000;">Nacionalidad: <input type="text" name="nacionalidad"></p>
+                    <p style="color: #000000;">Último equipo: <input type="text" name="ultimo equipo"></p>
+                    <p style="color: #000000;">Nuevo equipo: <input type="text" name="nuevo equipo"></p>
+                    <p style="color: #000000;">Valor de traspaso: <input type="text" name="valor de traspaso"></p>
+        
+                    <input type="submit" value="Enviar">
+                </form>
             </div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
-</html>
+        
+        </body>
